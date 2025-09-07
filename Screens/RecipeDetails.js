@@ -83,7 +83,7 @@ export default function RecipeDetails({ route }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10, backgroundColor: "#b76417ff" },
+  container: { flex: 1, padding: 10, backgroundColor: "#FFF8E1" },
   title: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
   image: { width: "100%", height: 200, borderRadius: 10 },
   flagContainer: { marginVertical: 10, alignItems: "center" },

@@ -36,12 +36,12 @@ export default function Categories({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10, backgroundColor: "#b76417ff" },
+  container: { flex: 1, padding: 10, backgroundColor: "#FFF8E1" },
   card: {
     flex: 1,
     margin: 5,
     alignItems: "center",
-    backgroundColor: "#e18a3aff",
+    backgroundColor: "#FFE0B2",
     borderRadius: 10,
     padding: 10,
   },

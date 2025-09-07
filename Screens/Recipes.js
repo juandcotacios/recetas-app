@@ -34,11 +34,11 @@ export default function Recipes({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10, backgroundColor: "#b76417ff" },
+  container: { flex: 1, padding: 10, backgroundColor: "#FFF8E1" },
   card: {
     marginBottom: 10,
     alignItems: "center",
-    backgroundColor: "#e18a3aff",
+    backgroundColor: "#FFE0B2",
     borderRadius: 10,
     padding: 10,
   },
