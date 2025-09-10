@@ -1,33 +1,15 @@
 import { useEffect, useState } from "react";
-import { Text, Image, ScrollView, StyleSheet, View } from "react-native";
-
+import { Text, Image, ScrollView, StyleSheet, View, ActivityIndicator } from "react-native";
+import Comentarios from "./Comentarios"; // 👈 importamos el módulo de comentarios
 
 const AREA_MAP = {
-  "British": "United Kingdom",
-  "American": "United States",
-  "Italian": "Italy",
-  "Spanish": "Spain",
-  "French": "France",
-  "Indian": "India",
-  "Mexican": "Mexico",
-  "Chinese": "People's Republic of China",
-  "Japanese": "Japan",
-  "Filipino": "Philippines",
-  "Vietnamese":"Vietnam",
-  "Malaysian":"Malaysia",
-  "Croatian":"Croatia",
-  "Uruguayan":"Uruguay",
-  "Irish":"Ireland",
-  "Egyptian":"Egypt",
-  "Polish":"Poland",
-  "Jamaican":"Jamaica",
-  "Canadian":"Canada",
-  "Greek":"Greece",
-  "Moroccan":"Morocco",
-  "Dutch":"Holland",
-  "Turkish":"Turkey",
-  "Ukrainian":"Ukraine",
-  "Kenyan":"Kenya",
+  British: "United Kingdom", American: "United States", Italian: "Italy",
+  Spanish: "Spain", French: "France", Indian: "India", Mexican: "Mexico",
+  Chinese: "People's Republic of China", Japanese: "Japan", Filipino: "Philippines",
+  Vietnamese: "Vietnam", Malaysian: "Malaysia", Croatian: "Croatia", Uruguayan: "Uruguay",
+  Irish: "Ireland", Egyptian: "Egypt", Polish: "Poland", Jamaican: "Jamaica",
+  Canadian: "Canada", Greek: "Greece", Moroccan: "Morocco", Dutch: "Holland",
+  Turkish: "Turkey", Ukrainian: "Ukraine", Kenyan: "Kenya",
 };
 
 export default function RecipeDetails({ route }) {
@@ -43,9 +25,7 @@ export default function RecipeDetails({ route }) {
         const meal = data.meals[0];
         setRecipe(meal);
 
-        // normalizamos el área
         const mappedArea = AREA_MAP[meal.strArea] || meal.strArea;
-
         if (mappedArea) {
           const resCountry = await fetch(`https://restcountries.com/v3.1/name/${mappedArea}`);
           const country = await resCountry.json();
@@ -53,42 +33,39 @@ export default function RecipeDetails({ route }) {
         }
       } catch (e) {
         console.error(e);
-        setFlag(null);
       }
     };
     load();
   }, []);
 
-  if (!recipe) return <Text>Cargando...</Text>;
+  if (!recipe) return <ActivityIndicator size="large" color="#FF6F00" style={{ marginTop: 20 }} />;
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{recipe.strMeal}</Text>
       <Image source={{ uri: recipe.strMealThumb }} style={styles.image} />
 
-      <View style={styles.flagContainer}>
-        {flag ? (
-          <Image source={{ uri: flag }} style={styles.flag} />
-        ) : (
-          <Text style={styles.noFlag}>Sin bandera</Text>
-        )}
+      <View style={styles.header}>
+        <Text style={styles.title}>{recipe.strMeal}</Text>
+        {flag && <Image source={{ uri: flag }} style={styles.flag} />}
       </View>
 
-      <Text style={styles.subtitle}>Origen: {recipe.strArea}</Text>
+      <Text style={styles.origin}>Origen: {recipe.strArea}</Text>
 
-      <Text style={styles.subtitle}>Instrucciones:</Text>
+      <Text style={styles.sectionTitle}>Instrucciones:</Text>
       <Text style={styles.text}>{recipe.strInstructions}</Text>
+      <Text style={styles.sectionTitle}>Calificaciones</Text>
+      <Comentarios recipeId={id} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10, backgroundColor: "#FFF8E1" },
-  title: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
-  image: { width: "100%", height: 200, borderRadius: 10 },
-  flagContainer: { marginVertical: 10, alignItems: "center" },
-  flag: { width: 60, height: 40 },
-  noFlag: { fontSize: 14, color: "gray", fontStyle: "italic" },
-  subtitle: { fontSize: 16, fontWeight: "bold", marginTop: 10 },
-  text: { fontSize: 14, marginTop: 5 },
+  container: { flex: 1, backgroundColor: "#FAFAFA", padding: 10 },
+  image: { width: "100%", height: 240, borderRadius: 12, marginBottom: 10 },
+  header: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+  title: { fontSize: 22, fontWeight: "bold", flex: 1, marginRight: 10 },
+  flag: { width: 50, height: 35, borderRadius: 4 },
+  origin: { fontSize: 16, fontWeight: "600", marginVertical: 8, color: "#FF6F00" },
+  sectionTitle: { fontSize: 18, fontWeight: "bold", marginTop: 12, marginBottom: 6 },
+  text: { fontSize: 15, lineHeight: 22, color: "#333" },
 });
