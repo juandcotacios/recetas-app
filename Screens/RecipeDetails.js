@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Text, Image, ScrollView, StyleSheet, View, ActivityIndicator } from "react-native";
-import Comentarios from "./Comentarios"; // 👈 importamos el módulo de comentarios
+import Comentarios from "./ComentariosGoogle"; // 👈 importamos el módulo de comentarios
 
 const AREA_MAP = {
   British: "United Kingdom", American: "United States", Italian: "Italy",
