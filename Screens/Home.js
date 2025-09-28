@@ -1,51 +1,62 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Home({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>CookApp</Text>
+    <LinearGradient colors={["#FFF3E0", "#FFE0B2"]} style={styles.container}>
       <Image
         source={{ uri: "https://img.pikbest.com/png-images/20241102/-22classic-restaurant-logo-with-chef-icon-22_11048989.png!sw800" }}
         style={styles.image}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Categorías")}
-      >
-        <Text style={styles.buttonText}>Iniciar</Text>
+      <Text style={styles.title}>CookApp</Text>
+      <Text style={styles.subtitle}>Descubre nuevas recetas 🍳</Text>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Categorías")}>
+        <Text style={styles.buttonText}>Explorar</Text>
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:
+  {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFF8E1",
-    padding: 20,
+    padding: 20
   },
-  title: {
-    fontSize: 32,
+  image:
+  {
+    width: 180,
+    height: 180,
+    marginBottom: 20
+  },
+  title:
+  {
+    fontSize: 36,
     fontWeight: "bold",
-    color: "#FF5722",
-    marginBottom: 20,
+    color: "#E65100",
+    marginBottom: 10
   },
-  image: {
-    width: 200,
-    height: 200,
+  subtitle:
+  {
+    fontSize: 16,
+    color: "#5D4037",
     marginBottom: 30,
+    textAlign: "center"
   },
   button: {
-    backgroundColor: "#FF5722",
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 10,
+    backgroundColor: "#FF6F00",
+    paddingVertical: 14,
+    paddingHorizontal: 40,
+    borderRadius: 30,
+    elevation: 5,
   },
-  buttonText: {
+  buttonText:
+  {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
 });
