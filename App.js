@@ -32,7 +32,7 @@ export default function App() {
               </View>
             ),
             headerStyle: { backgroundColor: "#FFE0B2" }, 
-            headerTintColor: "#FF5722", // color del icono de back
+            headerTintColor: "#FF5722",
           }}
         />
         <Stack.Screen
